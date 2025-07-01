@@ -18,17 +18,17 @@ def get_categories(prefix):
 
 
 # Generate options from model columns
-makes = get_categories("Make")
-models = get_categories("Model")
+make_option = get_categories("Make")
+model_option = get_categories("Model")
 years =get_categories("Year")
-engines = get_categories("Engine")
+engine_option = get_categories("Engine")
 cylinders = get_categories("Cylinders")
 mileages = get_categories("Mileage")
 doors = get_categories("Doors")
-fuels = get_categories("Fuel")
-transmissions = get_categories("Transmission")
-trims = get_categories("Trim")
-bodies = get_categories("Body")
+fuel_option = get_categories("Fuel")
+transmission_option = get_categories("Transmission")
+trim_option = get_categories("Trim")
+body_option = get_categories("Body")
 ext_colors = get_categories("ExteriorColor")
 int_colors = get_categories("InteriorColor")
 drivetrains = get_categories("Drivetrain")
@@ -40,15 +40,15 @@ mileages = st.number_input("Mileage (km)", min_value=0.0, step=1.0, value=10.0)
 doors = st.selectbox("Number of Doors", [2, 3, 4])
 
 # Categorical inputs
-makes = st.selectbox("Make", makes)
-models = st.selectbox("Model", models)
-fuels = st.selectbox("Fuel Type", fuels)
-transmissions = st.selectbox("Transmission", transmissions)
-trims = st.selectbox("Trim", trims)
-bodies = st.selectbox("Body Type", bodies)
-ext_color = st.selectbox("Exterior Color", ext_colors)
-int_color = st.selectbox("Interior Color", int_colors)
-drivetrains = st.selectbox("Drivetrain", drivetrains)
+make_selected = st.selectbox("Make", make_option)
+model_selected = st.selectbox("Model", model_option)
+fuel_selected = st.selectbox("Fuel Type", fuel_option)
+transmission_selected = st.selectbox("Transmission", transmission_option)
+trim_selected = st.selectbox("Trim", trim_option)
+body_selected = st.selectbox("Body Type", body_option)
+ext_colorSelected = st.selectbox("Exterior Color", ext_colors)
+int_colorSelected = st.selectbox("Interior Color", int_colors)
+drivetrains_selected = st.selectbox("Drivetrain", drivetrains)
 
 # Prepare the input row
 input_dict = {
@@ -56,15 +56,15 @@ input_dict = {
     "Cylinders": cylinders,
     "Mileage": mileages,
     "Doors": doors,
-    f"Make_{makes}": 1,
-    f"Model_{models}": 1,
-    f"Fuel_{fuels}": 1,
-    f"Transmission_{transmissions}": 1,
-    f"Trim_{trims}": 1,
-    f"Body_{bodies}": 1,
-    f"ExteriorColor_{ext_color}": 1,
-    f"InteriorColor_{int_color}": 1,
-    f"Drivetrain_{drivetrains}": 1,
+    f"Make_{make_selected}": 1,
+    f"Model_{model_selected}": 1,
+    f"Fuel_{fuel_selected}": 1,
+    f"Transmission_{transmission_selected}": 1,
+    f"Trim_{trim_selected}": 1,
+    f"Body_{body_selected}": 1,
+    f"ExteriorColor_{ext_colorSelected}": 1,
+    f"InteriorColor_{int_colorSelected}": 1,
+    f"Drivetrain_{drivetrains_selected}": 1,
 }
 
 # Encode categorical variables using one-hot encoding
