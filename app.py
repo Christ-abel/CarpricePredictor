@@ -83,7 +83,7 @@ prediction = model.predict(input_data_scaled)
 
 # Display the prediction
 st.subheader("Predicted Price")
-st.write(f"Ksh {prediction[0]:,.2f}")
+st.write(f"${prediction[0]:,.2f}")
 # Display the input data for reference
 st.subheader("Input Data")
 st.write(input_dict)
