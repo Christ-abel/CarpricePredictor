@@ -20,7 +20,7 @@ def get_categories(prefix):
 # Generate options from model columns
 makes_options = get_categories("Make")
 models_options = get_categories("Model")
-engines_optioons = get_categories("Engine")
+engines_options = get_categories("Engine")
 fuels_options = get_categories("Fuel")
 transmissions_options = get_categories("Transmission")
 trims_options = get_categories("Trim")
@@ -38,6 +38,7 @@ doors = st.selectbox("Number of Doors", [2, 3, 4])
 # Categorical inputs
 makes = st.selectbox("Make", makes_options)
 models = st.selectbox("Model", models_options)
+engines = st.selectbox("Engine",engines_options)
 fuels = st.selectbox("Fuel Type", fuels_options)
 transmissions = st.selectbox("Transmission", transmissions_options)
 trims = st.selectbox("Trim", trims_options)
@@ -55,6 +56,7 @@ input_dict = {
     f"Make_{makes}": 1,
     f"Model_{models}": 1,
     f"Fuel_{fuels}": 1,
+    f"Engine_{engines}": 1,
     f"Transmission_{transmissions}": 1,
     f"Trim_{trims}": 1,
     f"Body_{bodies}": 1,
