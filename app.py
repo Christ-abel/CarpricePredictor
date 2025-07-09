@@ -18,20 +18,16 @@ def get_categories(prefix):
 
 
 # Generate options from model columns
-make_option = get_categories("Make")
-model_option = get_categories("Model")
-years =get_categories("Year")
-engine_option = get_categories("Engine")
-cylinders = get_categories("Cylinders")
-mileages = get_categories("Mileage")
-doors = get_categories("Doors")
-fuel_option = get_categories("Fuel")
-transmission_option = get_categories("Transmission")
-trim_option = get_categories("Trim")
-body_option = get_categories("Body")
-ext_colors = get_categories("ExteriorColor")
-int_colors = get_categories("InteriorColor")
-drivetrains = get_categories("Drivetrain")
+makes_options = get_categories("Make")
+models_options = get_categories("Model")
+engines_optioons = get_categories("Engine")
+fuels_options = get_categories("Fuel")
+transmissions_options = get_categories("Transmission")
+trims_options = get_categories("Trim")
+bodies_options = get_categories("Body")
+ext_colors_options = get_categories("ExteriorColor")
+int_colors_options = get_categories("InteriorColor")
+drivetrains_options = get_categories("Drivetrain")
 
 # Numeric inputs
 years = st.number_input("Year", min_value=1990, max_value=2025, step=1, value=2024)
@@ -40,15 +36,15 @@ mileages = st.number_input("Mileage (km)", min_value=0.0, step=1.0, value=10.0)
 doors = st.selectbox("Number of Doors", [2, 3, 4])
 
 # Categorical inputs
-make_selected = st.selectbox("Make", make_option)
-model_selected = st.selectbox("Model", model_option)
-fuel_selected = st.selectbox("Fuel Type", fuel_option)
-transmission_selected = st.selectbox("Transmission", transmission_option)
-trim_selected = st.selectbox("Trim", trim_option)
-body_selected = st.selectbox("Body Type", body_option)
-ext_colorSelected = st.selectbox("Exterior Color", ext_colors)
-int_colorSelected = st.selectbox("Interior Color", int_colors)
-drivetrains_selected = st.selectbox("Drivetrain", drivetrains)
+makes = st.selectbox("Make", makes_options)
+models = st.selectbox("Model", models_options)
+fuels = st.selectbox("Fuel Type", fuels_options)
+transmissions = st.selectbox("Transmission", transmissions_options)
+trims = st.selectbox("Trim", trims_options)
+bodies = st.selectbox("Body Type", bodies_options)
+ext_color = st.selectbox("Exterior Color", ext_colors_options)
+int_color = st.selectbox("Interior Color", int_colors_options)
+drivetrains = st.selectbox("Drivetrain", drivetrains_options)
 
 # Prepare the input row
 input_dict = {
@@ -56,19 +52,19 @@ input_dict = {
     "Cylinders": cylinders,
     "Mileage": mileages,
     "Doors": doors,
-    f"Make_{make_selected}": 1,
-    f"Model_{model_selected}": 1,
-    f"Fuel_{fuel_selected}": 1,
-    f"Transmission_{transmission_selected}": 1,
-    f"Trim_{trim_selected}": 1,
-    f"Body_{body_selected}": 1,
-    f"ExteriorColor_{ext_colorSelected}": 1,
-    f"InteriorColor_{int_colorSelected}": 1,
-    f"Drivetrain_{drivetrains_selected}": 1,
+    f"Make_{makes}": 1,
+    f"Model_{models}": 1,
+    f"Fuel_{fuels}": 1,
+    f"Transmission_{transmissions}": 1,
+    f"Trim_{trims}": 1,
+    f"Body_{bodies}": 1,
+    f"ExteriorColor_{ext_color}": 1,
+    f"InteriorColor_{int_color}": 1,
+    f"Drivetrain_{drivetrains}": 1,
 }
 
 # Encode categorical variables using one-hot encoding
-input_data_encoded = pd.get_dummies(input_dict)
+input_data_encoded = pd.DataFrame([input_dict])
 # Align the input data with the model's expected input
 expected_columns =joblib.load('car_price_model_columns.pkl')
 
@@ -83,10 +79,12 @@ prediction = model.predict(input_data_scaled)
 
 # Display the prediction
 st.subheader("Predicted Price")
-st.write(f"${prediction[0]:,.2f}")
+st.write(f"$ {prediction[0]:,.2f}")
 # Display the input data for reference
 st.subheader("Input Data")
 st.write(input_dict)
+
+
 
 
 
